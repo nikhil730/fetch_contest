@@ -49,7 +49,8 @@ const curDate = new Date(curdatetime).toLocaleDateString("en-US");
 const curTime = new Date(curdatetime).toLocaleTimeString("en-US");
 // console.log(curDate);
 // console.log(curTime);
-function fetchdata() {
+const fetchdata = () => {
+  console.log("in function");
   fetch("https://kontests.net/api/v1/all")
     .then((response) => response.json())
     .then((body) => {
@@ -61,9 +62,6 @@ function fetchdata() {
         const startTime = new Date(startDateTime).toLocaleTimeString("en-US");
         const endDate = new Date(endDateTime).toLocaleDateString("en-US");
         const endTime = new Date(endDateTime).toLocaleTimeString("en-US");
-        // console.log(
-        //   (new Date(startDate) - new Date(curDate)) / (1000 * 3600 * 24)
-        // );
         if (contest.site === "CodeChef" || contest.site === "LeetCode") {
           const remdays =
             (new Date(startDate) - new Date(curDate)) / (1000 * 3600 * 24);
@@ -105,9 +103,9 @@ function fetchdata() {
         }
       });
     });
-}
+};
 fetchdata();
-setInterval(fetchdata, 10000);
+setInterval(fetchdata, 60000 * 60 * 12);
 
 app.get("/", function (req, res) {
   res.sendFile(__dirname + "/index.html");
