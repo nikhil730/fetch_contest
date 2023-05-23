@@ -107,7 +107,7 @@ function fetchdata() {
     });
 }
 fetchdata();
-setInterval(fetchdata, 60000 * 60 * 12);
+setInterval(fetchdata, 10000);
 
 app.get("/", function (req, res) {
   res.sendFile(__dirname + "/index.html");
