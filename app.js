@@ -98,10 +98,13 @@ const fetchdata = () => {
               });
             });
           } else {
-            //console.log("No contest");
+            console.log("No contest");
           }
         }
       });
+    })
+    .catch((error) => {
+      console.log(error);
     });
 };
 fetchdata();
