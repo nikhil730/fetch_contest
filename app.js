@@ -49,7 +49,10 @@ const curDate = new Date(curdatetime).toLocaleDateString("en-US");
 const curTime = new Date(curdatetime).toLocaleTimeString("en-US");
 // console.log(curDate);
 // console.log(curTime);
+let count = 0;
 const fetchdata = () => {
+  count = count + 1;
+  console.log(count);
   console.log("in function");
   fetch("https://kontests.net/api/v1/all")
     .then((response) => response.json())
@@ -108,7 +111,7 @@ const fetchdata = () => {
     });
 };
 fetchdata();
-setInterval(fetchdata, 60000 * 60 * 6);
+setInterval(fetchdata, 10000);
 
 app.get("/", function (req, res) {
   res.sendFile(__dirname + "/index.html");
