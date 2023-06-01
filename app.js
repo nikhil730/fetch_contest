@@ -85,9 +85,8 @@ const fetchdata = () => {
           if (
             remdays === 0 &&
             (starthours - nowhours === 1 || starthours - nowhours === 2) &&
-            startmins - nowhmins === 0 &&
-            startsecs - nowhsecs >= 0 &&
-            startsecs - nowhsecs <= 15
+            startmins - nowhmins >= 0 &&
+            startmins - nowhmins <= 15
           ) {
             console.log(contest.name);
             Email.find().then((email) => {
