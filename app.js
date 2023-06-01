@@ -65,10 +65,30 @@ const fetchdata = () => {
         const startTime = new Date(startDateTime).toLocaleTimeString("en-US");
         const endDate = new Date(endDateTime).toLocaleDateString("en-US");
         const endTime = new Date(endDateTime).toLocaleTimeString("en-US");
+        var starthours = new Date(startDateTime).getHours();
+        var startmins = new Date(startDateTime).getMinutes();
+        var startsecs = new Date(startDateTime).getSeconds();
+        var nowhours = new Date(curdatetime).getHours();
+        var nowhmins = new Date(curdatetime).getMinutes();
+        var nowhsecs = new Date(curdatetime).getSeconds();
+        // console.log(
+        //   starthours -
+        //     nowhours +
+        //     " " +
+        //     (startmins - nowhmins) +
+        //     " " +
+        //     (startsecs - nowhsecs)
+        // );
         if (contest.site === "CodeChef" || contest.site === "LeetCode") {
           const remdays =
             (new Date(startDate) - new Date(curDate)) / (1000 * 3600 * 24);
-          if (remdays === 0) {
+          if (
+            remdays === 0 &&
+            (starthours - nowhours === 1 || starthours - nowhours === 2) &&
+            startmins - nowhmins === 0 &&
+            startsecs - nowhsecs >= 0 &&
+            startsecs - nowhsecs <= 15
+          ) {
             console.log(contest.name);
             Email.find().then((email) => {
               email.forEach((emaill) => {
@@ -101,7 +121,7 @@ const fetchdata = () => {
               });
             });
           } else {
-            console.log("No contest");
+            // console.log("No contest");
           }
         }
       });
@@ -111,7 +131,7 @@ const fetchdata = () => {
     });
 };
 fetchdata();
-setInterval(fetchdata, 60000 * 60 * 6);
+setInterval(fetchdata, 60000 * 10);
 
 app.get("/", function (req, res) {
   res.sendFile(__dirname + "/index.html");
